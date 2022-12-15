@@ -4,9 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.ts"
+    "dev": "ts-node index.ts",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@vue/compiler-sfc": "^3.2.45",
+    "ts-node": "^10.9.1"
+  }
 }

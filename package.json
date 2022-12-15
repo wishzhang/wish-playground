@@ -1,0 +1,20 @@
+{
+  "name": "wish-playground",
+  "version": "0.1.0",
+  "description": "A playground run any demo.",
+  "main": "index.js",
+  "scripts": {
+    "@vue/compiler-sfc": "pnpm -C @vue/compiler-sfc "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wishzhang/wish-playground.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wishzhang/wish-playground/issues"
+  },
+  "homepage": "https://github.com/wishzhang/wish-playground#readme"
+}

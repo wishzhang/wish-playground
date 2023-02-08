@@ -1,47 +1,22 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+  /*
+    定义一个响应式变量，普通类型用 ref，reactive
+    他们的区别是：
+      - ref是通过RefImpl类的get set实现，而reactive通过proxy实现。ref其中对于对象是调用reactive来实现
+      - 上面了解了ref和reactive的原理，诸多不具有响应性的原因是值类型。
+     解包的规则就不细看了都是为了某方面的方便而搞的。如何使用呢？
+     多数情况下其实应该用ref，因为reactive可以定义一个较为完整的数据结构和更方便的API，但是不利于传值的响应
+
+     ---------------
+     透传 Attributes：这里注意一点是inheritAttrs决定该组件根元素是否透传，但$attrs在模板的非根元素也是有效的。
+      但是已包含在props的属性可以决定上面两者。
+   */
+  import HighButton from "@/components/HighButton.vue";
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <HighButton class="hi"/>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
 </style>

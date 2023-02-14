@@ -1,22 +1,18 @@
 <template>
   <div>
-    <BaseButton v-bind="$attrs"/>
+    {{ props.name }}
+    <br/>-----------<br/>
   </div>
+  <button @click="handleClick">子改</button>
 </template>
 
 <script lang="ts" setup>
-  import BaseButton from "@/components/BaseButton.vue";
   const props = defineProps<{
-    class: string
+    name: string
   }>()
-</script>
 
-<script lang="ts">
-  export default {
-    inheritAttrs: true
+  function handleClick() {
+    console.log('props')
+    console.log(props.name)
   }
 </script>
-
-<style scoped>
-
-</style>

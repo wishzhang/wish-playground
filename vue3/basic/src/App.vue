@@ -24,6 +24,6 @@
 </script>
 
 <template>
-  <HighButton :name="p"/>
+  <HighButton :p="p"/>
   <button @click="handleClick">改变p</button>
 </template>

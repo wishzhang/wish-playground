@@ -1,11 +1,12 @@
 <template>
-  <div>
-    <div id="main" style="width: 200px;height: 200px;"></div>
+  <div id="main-box" @resize="handleResize">
+    <div id="main" style="width: 100%;height: 200px;"></div>
   </div>
 </template>
 
 <script>
   import * as echarts from 'echarts';
+
   export default {
     name: "Adaptive",
     mounted() {
@@ -29,6 +30,23 @@
           }
         ]
       });
+
+      let el = document.getElementById('main-box')
+      el.addEventListener('resize', function (e) {
+        let target = e.target
+        console.log('000')
+        console.log(target.clientWidth, target.clientHeight);
+      })
+
+      const observer = new ResizeObserver(function elResizeChange(entries) {
+        console.log('aa')
+      })
+      observer.observe(el) // 观测DOM元素
+    },
+    methods: {
+      handleResize(e) {
+        console.log('33')
+      }
     }
   }
 </script>

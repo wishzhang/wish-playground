@@ -1,25 +1,20 @@
 <template>
-  <div id="app">
-    <Comp1></Comp1>
-    <Comp2></Comp2>
+  <div id="app" class="cockpit-ui-library">
+    <div data-greet>hi</div>
   </div>
 </template>
 
 <script>
-import Comp1 from './components/Comp1.vue'
-import Comp2 from '@/components/Comp2.vue';
 export default {
   name: 'App',
   components: {
-    Comp1,
-    Comp2,
   },
   methods: {
   }
 }
 </script>
 
-<style>
+<style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -27,5 +22,21 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+::v-deep .hi{
+  background: red;
+}
+
+>>> .hello {
+  background: black;
+}
+
+/deep/ .greet {
+  background: blue;
+}
+
+[data-greet] {
+  background: purple;
 }
 </style>

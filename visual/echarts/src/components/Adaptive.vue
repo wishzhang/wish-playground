@@ -1,19 +1,30 @@
 <template>
-  <div id="main-box" @resize="handleResize">
-    <div id="main" style="width: 100%;height: 200px;"></div>
+  <div id="main-box">
+    <div id="main" style="width: 500px;height: 400px;"></div>
+
+    <button @click="updateEcharts">更新</button>
   </div>
 </template>
 
 <script>
   import * as echarts from 'echarts';
+  import {initEchartsResize} from '@/initEchartsResize';
 
   export default {
     name: "Adaptive",
+    data() {
+      return {
+        myChart: {},
+        myChart2: {}
+      }
+    },
     mounted() {
       // 基于准备好的dom，初始化echarts实例
-      var myChart = echarts.init(document.getElementById('main'));
+      this.myChart = echarts.init(document.getElementById('main'));
+      this.myChart2 = echarts.init(document.getElementById('main'));
+      console.log(this.myChart === this.myChart2)
       // 绘制图表
-      myChart.setOption({
+      this.myChart.setOption({
         title: {
           text: 'ECharts 入门示例'
         },
@@ -26,31 +37,33 @@
           {
             name: '销量',
             type: 'bar',
-            data: [5, 20, 36, 10, 10, 20]
+            data: [5, 20, 36, 10, 10, 20],
+            // barMinWidth: 10,
+            // barMaxWidth: 50
           }
         ]
       });
 
-      let el = document.getElementById('main-box')
-      el.addEventListener('resize', function (e) {
-        let target = e.target
-        console.log('000')
-        console.log(target.clientWidth, target.clientHeight);
+      initEchartsResize({
+        referVm: this,
+        echartsInstance: this.myChart
       })
-
-      const observer = new ResizeObserver(function elResizeChange(entries) {
-        console.log('aa')
-      })
-      observer.observe(el) // 观测DOM元素
     },
     methods: {
-      handleResize(e) {
-        console.log('33')
+      updateEcharts() {
+        let el = document.getElementById('main')
+        el.width = 400
+        el.height = 800
+        this.myChart.resize({
+          width: 400,
+          height: 800
+        })
       }
     }
   }
 </script>
 
 <style scoped>
-
+  #main-box {
+  }
 </style>

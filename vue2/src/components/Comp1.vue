@@ -1,30 +1,24 @@
 <template>
-  <div class="hello">
-    {{value2_copy}}
+  <div>
+    comp1
+    <button @click="handleClick">comp1</button>
   </div>
 </template>
 
 <script>
+  export let isLocal = {
+    value: false
+  }
   export default {
     name: 'Comp1',
-    props: {
-      value: {
-        type: String,
-        default: 'hi'
-      },
-      value2: {
-        type: String,
-        default: 'hi2'
-      },
+    mounted() {
+      console.log('this is comp1 mounted')
+      console.log('isLocal=' + isLocal.value)
     },
-    data() {
-      return {
-        value2_copy: this.value2
+    methods: {
+      handleClick() {
+        isLocal.value = true
       }
     }
   }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-</style>

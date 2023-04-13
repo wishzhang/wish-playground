@@ -3,8 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
+  <style>
+    .parent {
+      width: 400px;
+      height: 400px;
+      background-color: gray;
+    }
+
+    .child {
+      width: 200px;
+      height: 200px;
+      background-color: lightblue;
+    }
+  </style>
 </head>
 <body>
-  <script type="module" src="./index.js" ></script>
+<div id="app">
+  {{greet}}
+  <div class="parent" @click="handleParentClick">
+    <div class="child" @click="handleChildClick"></div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data() {
+      return {
+        greet: 'hi'
+      }
+    },
+    methods: {
+      handleParentClick() {
+        console.log('aa')
+      },
+      handleChildClick() {
+        console.log('bb')
+      }
+    }
+  })
+</script>
 </body>
 </html>

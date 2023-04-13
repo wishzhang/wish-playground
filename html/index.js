@@ -1,4 +1,10 @@
-import other, {greet} from './other.js'
+new Vue({
+  el: '#app',
+  data() {
+    return {
+      greet: 'hi'
+    }
+  }
+})
 
-greet(other.name)
 

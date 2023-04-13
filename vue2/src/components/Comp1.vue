@@ -1,23 +1,27 @@
 <template>
-  <div>
-    comp1
-    <button @click="handleClick">comp1</button>
+  <div class="parent">parent
+    <span @click="handleClick">fu dianji</span>
   </div>
 </template>
 
 <script>
-  export let isLocal = {
-    value: false
-  }
+  let i=0
   export default {
     name: 'Comp1',
+    props: {
+      activeItem: {
+        type: Object,
+        default: null
+      }
+    },
     mounted() {
-      console.log('this is comp1 mounted')
-      console.log('isLocal=' + isLocal.value)
     },
     methods: {
       handleClick() {
-        isLocal.value = true
+        console.log('hh')
+        this.$emit('click', {
+          greet: 'hi'+i++
+        })
       }
     }
   }

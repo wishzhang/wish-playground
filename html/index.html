@@ -20,9 +20,6 @@
 <body>
 <div id="app">
   {{greet}}
-  <div class="parent" @click="handleParentClick">
-    <div class="child" @click="handleChildClick"></div>
-  </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
 <script>
@@ -32,6 +29,10 @@
       return {
         greet: 'hi'
       }
+    },
+    mounted() {
+      const url = 'AreaPollutantSurveyWidget@0.1.0.zip'
+
     },
     methods: {
       handleParentClick() {

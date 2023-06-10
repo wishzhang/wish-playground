@@ -1,4 +1,5 @@
-import other, {greet} from './other.js'
-
-greet(other.name)
+Promise.resolve().then(()=>{
+  console.log('setTimeout')
+})
+console.log(a)
 

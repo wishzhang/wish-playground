@@ -3,8 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
+  <style>
+    .test {
+        width: 600px;
+        height: 600px !important;
+        padding: 100px;
+        border: 100px;
+        background: red;
+        box-sizing: border-box;
+        overflow: scroll;
+    }
+  </style>
 </head>
 <body>
-  <script type="module" src="./index.js" ></script>
+  <div class="test" id="test" style="height: 800px;">
+    <div style="height: 10000px;"></div>
+  </div>
+  <script>
+    let el = document.getElementById('test')
+    console.log('offsetHeight:'+el.offsetHeight)
+    let rect = el.getBoundingClientRect()
+    console.log('rect.height:'+rect.height)
+    console.log('scrollHeight'+el.scrollHeight)
+    // console.log('clientHeight:'+el.clientHeight)
+    // console.log('el.height:'+window.getComputedStyle(el).height)
+    // console.log('el.height2:'+el.style.height)
+  </script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <template>
-  <div>comp2
-  <button @click="handleClick">comp2</button>
+  <div id="test" style="height: 100px">comp2
+    hi2
   </div>
 </template>
 
@@ -10,14 +10,10 @@
   export default {
     name: "Comp2",
     mounted() {
-      console.log('this is comp2 mounted')
-      console.log('isLocal=' + isLocal.value)
+      let el = document.getElementById('test')
+      el.style.color = 'red'
     },
     methods: {
-      handleClick() {
-        console.log('this is comp2 handleClick')
-        console.log('isLocal=' + isLocal.value)
-      }
     }
   }
 </script>

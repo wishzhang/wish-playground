@@ -1,20 +1,25 @@
 <template>
   <div id="app">
-    <Comp1></Comp1>
-    <Comp2></Comp2>
+    <button @click="handleClick">hihihi</button>
   </div>
 </template>
 
 <script>
-import Comp1 from './components/Comp1.vue'
-import Comp2 from '@/components/Comp2.vue';
+  import System from 'systemjs'
+
 export default {
   name: 'App',
   components: {
-    Comp1,
-    Comp2,
+
+  },
+  mounted() {
+    let el = document.getElementById('test')
+    console.log(el)
   },
   methods: {
+    handleClick() {
+      System.import('http://159.75.234.119/remote-load/index.umd.js');
+    }
   }
 }
 </script>

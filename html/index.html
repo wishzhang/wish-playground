@@ -4,30 +4,45 @@
   <meta charset="UTF-8">
   <title>Title</title>
   <style>
-    .test {
-        width: 600px;
-        height: 600px !important;
-        padding: 100px;
-        border: 100px;
-        background: red;
-        box-sizing: border-box;
-        overflow: scroll;
+    .parent {
+      width: 400px;
+      height: 400px;
+      background-color: gray;
+    }
+
+    .child {
+      width: 200px;
+      height: 200px;
+      background-color: lightblue;
     }
   </style>
 </head>
 <body>
-  <div class="test" id="test" style="height: 800px;">
-    <div style="height: 10000px;"></div>
-  </div>
-  <script>
-    let el = document.getElementById('test')
-    console.log('offsetHeight:'+el.offsetHeight)
-    let rect = el.getBoundingClientRect()
-    console.log('rect.height:'+rect.height)
-    console.log('scrollHeight'+el.scrollHeight)
-    // console.log('clientHeight:'+el.clientHeight)
-    // console.log('el.height:'+window.getComputedStyle(el).height)
-    // console.log('el.height2:'+el.style.height)
-  </script>
+<div id="app">
+  {{greet}}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data() {
+      return {
+        greet: 'hi'
+      }
+    },
+    mounted() {
+      const url = 'AreaPollutantSurveyWidget@0.1.0.zip'
+
+    },
+    methods: {
+      handleParentClick() {
+        console.log('aa')
+      },
+      handleChildClick() {
+        console.log('bb')
+      }
+    }
+  })
+</script>
 </body>
 </html>

@@ -1,5 +1,10 @@
-Promise.resolve().then(()=>{
-  console.log('setTimeout')
+new Vue({
+  el: '#app',
+  data() {
+    return {
+      greet: 'hi'
+    }
+  }
 })
-console.log(a)
+
 

@@ -1,8 +1,9 @@
 <template>
   <grid-layout :layout.sync="layout"
-               :col-num="120"
-               :row-height="1"
+               :col-num="colNum"
+               :row-height="10"
                :min-h="1"
+               :margin="[0, 0]"
                :min-w="1"
                :is-draggable="draggable"
                :is-resizable="resizable"
@@ -11,55 +12,67 @@
   >
     <grid-item v-for="item in layout"
                :static="item.static"
+               :key="item.i"
                :x="item.x"
                :y="item.y"
                :w="item.w"
                :h="item.h"
                :i="item.i"
     >
-      <span class="text">{{itemTitle(item)}}</span>
+      <WrapComp ref="wrap">{{ itemTitle(item) }}</WrapComp>
     </grid-item>
   </grid-layout>
 </template>
 
 <script>
-  import { GridLayout, GridItem } from "vue-grid-layout"
+  import {GridLayout, GridItem} from "vue-grid-layout"
+  import WrapComp from '@/components/WrapComp.vue';
 
   export default {
     components: {
       GridLayout,
-      GridItem
+      GridItem,
+      WrapComp
     },
     data() {
       return {
+        colNum: 100,
+        rowHeight: 10,
         layout: [
-          {"x":0,"y":0,"w":1,"h":30,"i":"0", static: false},
-          {"x":2,"y":0,"w":2,"h":4,"i":"1", static: true},
-          {"x":4,"y":0,"w":2,"h":5,"i":"2", static: false},
-          {"x":6,"y":0,"w":2,"h":3,"i":"3", static: false},
-          {"x":8,"y":0,"w":2,"h":3,"i":"4", static: false},
-          {"x":10,"y":0,"w":2,"h":3,"i":"5", static: false},
-          {"x":0,"y":5,"w":2,"h":5,"i":"6", static: false},
-          {"x":2,"y":5,"w":2,"h":5,"i":"7", static: false},
-          {"x":4,"y":5,"w":2,"h":5,"i":"8", static: false},
-          {"x":6,"y":3,"w":2,"h":4,"i":"9", static: true},
-          {"x":8,"y":4,"w":2,"h":4,"i":"10", static: false},
-          {"x":10,"y":4,"w":2,"h":4,"i":"11", static: false},
-          {"x":0,"y":10,"w":2,"h":5,"i":"12", static: false},
-          {"x":2,"y":10,"w":2,"h":5,"i":"13", static: false},
-          {"x":4,"y":8,"w":2,"h":4,"i":"14", static: false},
-          {"x":6,"y":8,"w":2,"h":4,"i":"15", static: false},
-          {"x":8,"y":10,"w":2,"h":5,"i":"16", static: false},
-          {"x":10,"y":4,"w":2,"h":2,"i":"17", static: false},
-          {"x":0,"y":9,"w":2,"h":3,"i":"18", static: false},
-          {"x":2,"y":6,"w":2,"h":2,"i":"19", static: false}
+          {"x": 0, "y": 0, "w": 10, "h": 10, "i": "0", static: false}
+          // {"x":12,"y":30,"w":10,"h":30,"i":"1", static: false},
         ],
         draggable: true,
         resizable: true,
         index: 0
       }
     },
+    created() {
+
+    },
+    async mounted() {
+      let bodyWidth = document.body.offsetWidth
+      this.colNum = Math.floor(bodyWidth / 10)
+      this.layout = this.getLayouts(this.layout)
+    },
     methods: {
+      getLayouts(layout) {
+        layout = JSON.parse(JSON.stringify(layout))
+        layout = layout.map((el, index) => {
+          let wrapEl = this.$refs.wrap[index].$el
+          let autoHeight = this.getAutoHeight(wrapEl)
+          el.h = this.getGridItemH(autoHeight)
+          wrapEl.style.height= '100%'
+          return el
+        })
+        return layout
+      },
+      getGridItemH(h, cellH = 10) {
+        return Math.floor(h / cellH)
+      },
+      getAutoHeight(el) {
+        return el.offsetHeight
+      },
       itemTitle(item) {
         let result = item.i;
         if (item.static) {
@@ -90,16 +103,9 @@
   }
 
   .vue-grid-item .text {
-    font-size: 24px;
+    font-size: 12px;
     text-align: center;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    height: 100%;
-    width: 100%;
+    background: red;
   }
 
   .vue-grid-item .no-drag {

@@ -16,30 +16,36 @@
       background-color: lightblue;
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
 </head>
 <body>
 <div id="app">
-  {{greet}}
+  {{hi}}
+  <button @click="handleClick">oooooooooo</button>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
 <script>
   new Vue({
     el: '#app',
     data() {
       return {
-        greet: 'hi'
+        hi: 'hhh'
       }
     },
-    mounted() {
-      const url = 'AreaPollutantSurveyWidget@0.1.0.zip'
-
-    },
     methods: {
-      handleParentClick() {
-        console.log('aa')
-      },
-      handleChildClick() {
-        console.log('bb')
+      handleClick() {
+        navigator.geolocation.getCurrentPosition(
+          function(position) {
+            console.log('ok')
+            console.log(position)
+            // 成功回调
+          },
+          function(error) {
+            console.log('err')
+            // 错误回调
+            console.log(error);
+          },
+          { timeout: 10000 } // 设置超时时间为 10 秒
+        );
       }
     }
   })

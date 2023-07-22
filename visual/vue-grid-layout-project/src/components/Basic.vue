@@ -1,27 +1,32 @@
 <template>
-  <grid-layout :layout.sync="layout"
-               :col-num="colNum"
-               :row-height="10"
-               :min-h="1"
-               :margin="[0, 0]"
-               :min-w="1"
-               :is-draggable="draggable"
-               :is-resizable="resizable"
-               :vertical-compact="true"
-               :use-css-transforms="true"
-  >
-    <grid-item v-for="item in layout"
-               :static="item.static"
-               :key="item.i"
-               :x="item.x"
-               :y="item.y"
-               :w="item.w"
-               :h="item.h"
-               :i="item.i"
+  <div style="width: 500px;">
+    <grid-layout :layout.sync="layout"
+                 :col-num="colNum"
+                 :row-height="10"
+                 :min-h="1"
+                 :margin="[0, 0]"
+                 :min-w="1"
+                 :is-draggable="draggable"
+                 :is-resizable="resizable"
+                 :vertical-compact="true"
+                 :use-css-transforms="true"
+                 @layout-created="layoutCreatedEvent"
+                 @layout-updated="layoutUpdatedEvent"
     >
-      <WrapComp ref="wrap">{{ itemTitle(item) }}</WrapComp>
-    </grid-item>
-  </grid-layout>
+      <grid-item v-for="item in layout"
+                 :static="item.static"
+                 :key="item.i"
+                 :x="item.x"
+                 :y="item.y"
+                 :w="item.w"
+                 :h="item.h"
+                 :i="item.i"
+      >
+        <WrapComp ref="wrap">{{ itemTitle(item) }}</WrapComp>
+      </grid-item>
+    </grid-layout>
+  </div>
+
 </template>
 
 <script>
@@ -39,8 +44,12 @@
         colNum: 100,
         rowHeight: 10,
         layout: [
-          {"x": 0, "y": 0, "w": 10, "h": 10, "i": "0", static: false}
-          // {"x":12,"y":30,"w":10,"h":30,"i":"1", static: false},
+          {"x": 0, "y": 0, "w": 10, "h": 10, "i": "0", static: false},
+          {"x": 0, "y": 10, "w": 10, "h": 10, "i": "2", static: false},
+          {"x": 20, "y": 0, "w": 10, "h": 10, "i": "1", static: false},
+          {"x": 20, "y": 2, "w": 10, "h": 10, "i": "3", static: false},
+          {"x": 20, "y": 3, "w": 10, "h": 50, "i": "4", static: false},
+          {"x": 20, "y": 4, "w": 10, "h": 10, "i": "5", static: false}
         ],
         draggable: true,
         resizable: true,
@@ -48,14 +57,32 @@
       }
     },
     created() {
-
+      console.log('created')
     },
     async mounted() {
-      let bodyWidth = document.body.offsetWidth
-      this.colNum = Math.floor(bodyWidth / 10)
-      this.layout = this.getLayouts(this.layout)
+      console.log('mounted')
+      console.log(this.$refs.wrap[0].$el.offsetHeight)
+      // this.$nextTick(()=>{
+      //   console.log('mounted oo')
+      //   console.log(this.$refs.wrap[0].$el.offsetHeight)
+      // })
+      // this.layout = this.getLayouts(this.layout)
+      // let bodyWidth = document.body.offsetWidth
+      // this.colNum = Math.floor(bodyWidth / 10)
+      // setTimeout(()=>{
+      //   console.log('layout cal')
+      //   this.layout = this.getLayouts(this.layout)
+      // }, 3000)
     },
     methods: {
+      layoutCreatedEvent(e) {
+        console.log('layoutCreatedEvent')
+        console.log(e)
+      },
+      layoutUpdatedEvent(e) {
+        console.log('layoutUpdatedEvent')
+        console.log(e)
+      },
       getLayouts(layout) {
         layout = JSON.parse(JSON.stringify(layout))
         layout = layout.map((el, index) => {

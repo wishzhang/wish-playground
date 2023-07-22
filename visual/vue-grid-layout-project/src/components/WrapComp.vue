@@ -1,12 +1,28 @@
 <template>
 <div class="wrap">
+  <button @click="handleClick">go it</button>
   <div>a</div>
-  <div>b</div>
+  <div><slot></slot></div>
 </div>
 </template>
 
-<script lang="ts" setup>
-
+<script>
+  export default {
+    name: 'WrapComp',
+    data() {
+      return {
+        flag: false
+      }
+    },
+    methods: {
+      handleClick() {
+        setTimeout(()=>{
+          console.log('show')
+          this.flag = true
+        }, 2000)
+      }
+    }
+  }
 </script>
 
 <style scoped lang="scss">

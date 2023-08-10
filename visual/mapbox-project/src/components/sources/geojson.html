@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <title>Load GeoJSON data with Mapbox GL JS</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+  <style>
+    body { margin: 0; padding: 0; }
+    #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+  </style>
+</head>
+<body>
+<div id='map'></div>
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1Ijoid2lzaHpoYW5nIiwiYSI6ImNsZjBidHgxeTA3bmIzc296dDdhZDR6cjEifQ.t-sfghrV5H8ZUNdKSAU6ww';
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [113.23, 23.16],
+    zoom: 1
+  });
+
+  map.on('load', function () {
+    map.addSource('gd-cities', {
+      type: 'geojson',
+      data: 'https://geo.datav.aliyun.com/areas_v2/bound/440000_full.json'
+    });
+
+    map.addLayer({
+      id: 'gd-cities-fill',
+      type: 'fill',
+      source: 'gd-cities',
+      paint: {
+        'fill-color': [
+          'match',
+          ['get', 'name'],
+          '广州市', '#fbb03b',
+          '深圳市', '#223b53',
+          '珠海市', '#e55e5e',
+          '中山市', '#a7dfee',
+          '#ccc'
+        ],
+        'fill-opacity': 0.8
+      }
+    });
+
+    map.addLayer({
+      id: 'gd-cities-outline',
+      type: 'line',
+      source: 'gd-cities',
+      paint: {
+        'line-color': '#000',
+        'line-width': 1
+      }
+    });
+  });
+</script>
+</body>
+</html>

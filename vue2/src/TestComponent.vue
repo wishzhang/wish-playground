@@ -1,37 +1,22 @@
 <template>
-<div>this is TestComponent</div>
+<div>
+<!--  <BaseComp name="hi" :style="{background: 'red'}" how/>-->
+  <BaseButton type="primary" :style="{width: '200px', height: '100px'}">确定</BaseButton>
+</div>
 </template>
 
 <script>
-  const pLimit = require('p-limit');
-
+  import BaseComp from '@/BaseComp';
+  import BaseButton from '@/BaseButton';
   export default {
-    name: "TestComponent4",
+    name: "TestComponent",
+    components: {
+      BaseButton,
+      BaseComp
+    },
     created() {
-      this.myWay()
     },
     methods: {
-      async myWay() {
-        const limit = pLimit(1);
-
-        const fetchSomething = (str) => {
-          return new Promise((resolve, reject)=>{
-            setTimeout(()=>{
-              console.log(str)
-              resolve()
-            }, 2000)
-          })
-        }
-
-        const input = [
-          limit(() => fetchSomething('foo')),
-          limit(() => fetchSomething('bar')),
-        ];
-
-        const result = await Promise.all(input);
-        console.log('result')
-        console.log(result);
-      }
     }
   }
 </script>

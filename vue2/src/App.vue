@@ -1,12 +1,16 @@
 <template>
   <div id="app">
-    <component is="TestComponent2"/>
+    <TestComponent/>
   </div>
 </template>
 
 <script>
+  import TestComponent from '@/TestComponent';
   export default {
     name: 'App',
+    components: {
+      TestComponent
+    },
     data() {
       return {}
     },
